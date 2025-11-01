@@ -8,7 +8,7 @@ TRAINED_MODEL = os.path.join(BASE, "best_trained_unet.h5")
 TEST_IMAGES = os.path.join(BASE, 'HipMRI_Study_open/keras_slices_data/keras_slices_test')
 TEST_MASKS = os.path.join(BASE, 'HipMRI_Study_open/keras_slices_data/keras_slices_seg_test')
 
-TARGET_IMG_SHAPE = (128, 128)
+TARGET_IMG_SHAPE = (256, 128)
 NUM_CLASSES = 6
 
 def multiclass_dice_tf(y_true, y_pred, num_classes=6, epsilon=1e-6):

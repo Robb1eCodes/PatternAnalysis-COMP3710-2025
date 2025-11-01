@@ -1,5 +1,6 @@
 import os
 import tensorflow as tf
+import matplotlib.pyplot as plt
 from dataset import load_data_2D
 from modules import unet_2d
 
@@ -13,10 +14,10 @@ NUM_CLASSES = 6
 
 MODEL_SAVE_OUT = os.path.join(BASE, 'best_trained_unet.h5')
 
-EPOCHS = 50
+EPOCHS = 3
 BATCH_SIZE = 32
 
-TARGET_IMG_SHAPE = (128, 128)
+TARGET_IMG_SHAPE = (256, 128)
 
 def main():
     # base file path
@@ -48,7 +49,7 @@ def main():
         tf.keras.callbacks.EarlyStopping(monitor='val_loss', mode='min', patience=12, verbose=1)
     ]
 
-    training_history = model.fit(
+    model_fit_res = model.fit(
         X_train, Y_train,
         validation_data=(X_val, Y_val),
         epochs=EPOCHS,
@@ -56,6 +57,18 @@ def main():
         callbacks=callbacks,
         shuffle=True
     )
+
+    # Plot training and validation loss
+    history = model_fit_res.history
+    plt.figure(figsize=(10, 5))
+    plt.plot(history['loss'], label='Training Loss')
+    plt.plot(history['val_loss'], label='Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
 
 if __name__ == '__main__':
     main()
