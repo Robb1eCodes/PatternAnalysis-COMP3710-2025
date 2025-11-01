@@ -91,7 +91,7 @@ def main():
         plt.title('Predicted Mask')
         plt.axis('off')
 
-        plt.suptitle(f'Test Masks {i+1} | Classes: {", ".join(class_names)}') # Subtitle
+        plt.suptitle(f'Test Masks {i+1}') # Subtitle
         plt.tight_layout()
         plt.show()
 
