@@ -73,9 +73,9 @@ def load_data_2D(imageNames, normImage=False, categorical=False, dtype=np.float3
             #~ inImage = 255. * inImage / inImage . max ()
             inImage = (inImage - inImage.mean()) / inImage.std()
 
-        # inImage = resize(inImage, target_shape, preserve_range=True)
+        inImage = resize(inImage, target_shape, preserve_range=True)
         if categorical:
-            inImage = to_channels(resize(inImage, target_shape, preserve_range=True), num_classes=num_classes, dtype=dtype)
+            inImage = to_channels(inImage, num_classes=num_classes, dtype=dtype)
             images[i, :, :, :] = inImage
         else:
             images[i, :, :] = inImage
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     base = os.path.dirname(__file__)
     train_folder = os.path.join(base, 'HipMRI_Study_open\keras_slices_data\keras_slices_seg_train')
     image_names = [os.path.join(train_folder, fname) for fname in os.listdir(train_folder) if fname.endswith('.nii') or fname.endswith('.nii.gz')]
-    images = load_data_2D(image_names, categorical=True, target_shape=(256, 128))
+    images = load_data_2D(image_names, categorical=True, target_shape=(128, 64))
 
 
     # output tests of loaded data (counts / possibly images)
