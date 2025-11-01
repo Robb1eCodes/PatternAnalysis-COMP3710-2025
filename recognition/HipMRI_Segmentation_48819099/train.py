@@ -14,8 +14,8 @@ NUM_CLASSES = 6
 
 MODEL_SAVE_OUT = os.path.join(BASE, 'best_trained_unet.h5')
 
-EPOCHS = 3
-BATCH_SIZE = 32
+EPOCHS = 10
+BATCH_SIZE = 64
 
 TARGET_IMG_SHAPE = (256, 128)
 
