@@ -24,7 +24,7 @@ def double_conv(tensor, filters, conv_size = 3, activation = 'relu'):
     return tensor
 
 
-def unet_2d(input_size = (256,256, 1), num_filters=32):
+def unet_2d(input_size = (256, 256, 1), num_filters=32):
     """
     Builds a 2D U-Net model to mask Hip MRI study data.
 
