@@ -53,6 +53,7 @@ def load_data_2D(imageNames, normImage=False, categorical=False, dtype=np.float3
     if categorical:
         first_case = to_channels(resize(first_case, target_shape, preserve_range=True), dtype=dtype)
         rows, cols, channels = first_case.shape
+        print(channels)
         images = np.zeros((num, rows, cols, channels), dtype=dtype)
     else:
         first_case = resize(first_case, target_shape, preserve_range=True)
@@ -96,11 +97,18 @@ if __name__ == '__main__':
     Loads the dataset using the load_data_2D method, then prints the numbers to check if reasonable.
     """
 
-    # load data
+    # load normal image data
     base = os.path.dirname(__file__)
     train_folder = os.path.join(base, 'HipMRI_Study_open\keras_slices_data\keras_slices_train')
     image_names = [os.path.join(train_folder, fname) for fname in os.listdir(train_folder) if fname.endswith('.nii') or fname.endswith('.nii.gz')]
-    images = load_data_2D(image_names, normImage=True, categorical=False, dtype=np.float32, target_shape=(256, 256))
+    images = load_data_2D(image_names, categorical=False, target_shape=(256, 256))
+
+    # load mask data test
+    base = os.path.dirname(__file__)
+    train_folder = os.path.join(base, 'HipMRI_Study_open\keras_slices_data\keras_slices_seg_train')
+    image_names = [os.path.join(train_folder, fname) for fname in os.listdir(train_folder) if fname.endswith('.nii') or fname.endswith('.nii.gz')]
+    images = load_data_2D(image_names, categorical=True, target_shape=(256, 256))
+
 
     # output tests of loaded data (counts / possibly images)
     print(f'Loaded {images.shape[0]} images of shape {images.shape[1:]}')
