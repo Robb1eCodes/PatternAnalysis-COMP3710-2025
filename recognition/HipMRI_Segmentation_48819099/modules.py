@@ -80,8 +80,8 @@ def unet_2d(input_size = (256, 256, 1), num_filters=32):
     u1 = tf.keras.layers.concatenate([u1, c1])
     c9 = double_conv(u1, num_filters)
 
-    # Output layer: produces segmentation mask (1 channel, sigmoid activation)
-    outputs = tf.keras.layers.Conv2D(1, (1, 1), activation='sigmoid')(c9)
+    # Output layer: produces segmentation mask (6 channels (classes), softmax activation)
+    outputs = tf.keras.layers.Conv2D(6, (1, 1), activation='softmax')(c9)
 
     # Build model
     model = tf.keras.Model(inputs=[inputs], outputs=[outputs])
