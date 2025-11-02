@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from skimage.transform import resize
 
-
+# This code was provided by the COMP3710 team in the assignment document. It has been updated to include for number of classes in masks,
+# as well as resizing the images when requested for easier and faster testing of the model.
 
 def to_channels(arr: np.ndarray, num_classes=6, dtype=np.uint8) -> np.ndarray:
     """

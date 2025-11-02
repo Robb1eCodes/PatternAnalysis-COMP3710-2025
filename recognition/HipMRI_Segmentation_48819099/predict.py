@@ -43,7 +43,11 @@ def multiclass_dice_tf(y_true, y_pred, num_classes=6, epsilon=1e-6):
     return mean_dice, dice_scores
 
 def main():
+    """
+    Run the model predictions
+    """
 
+    # Error if trained model file isn't found.
     if not os.path.exists(TRAINED_MODEL):
         raise FileNotFoundError(f"Model file not found at: {TRAINED_MODEL}")
 
