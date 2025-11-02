@@ -39,7 +39,8 @@ def multiclass_dice_tf(y_true, y_pred, num_classes=6, epsilon=1e-6):
         # Store Dice score for this class
         dice_scores.append(dice)
     # Return the mean Dice score across all classes
-    return tf.reduce_mean(dice_scores)
+    mean_dice = tf.reduce_mean(dice_scores)
+    return mean_dice, dice_scores
 
 def main():
 
@@ -59,9 +60,15 @@ def main():
     Y_pred = model.predict(X_test, batch_size=8)
 
     # Get mean Dice score of model predictions
-    mean_dice = multiclass_dice_tf(Y_test, Y_pred, num_classes=6)
+    mean_dice, dice_scores = multiclass_dice_tf(Y_test, Y_pred, num_classes=6)
 
     print(f'Mean Dice on test set (all classes): {mean_dice:.4f}')
+    print(f'Class 0: {dice_scores[0]:.4f}')
+    print(f'Class 1: {dice_scores[1]:.4f}')
+    print(f'Class 2: {dice_scores[2]:.4f}')
+    print(f'Class 3: {dice_scores[3]:.4f}')
+    print(f'Class 4: {dice_scores[4]:.4f}')
+    print(f'Class 5: {dice_scores[5]:.4f}')
 
     # Plot 5 test images against ground truth and predicted masks
     num_to_show = min(5, len(X_test))

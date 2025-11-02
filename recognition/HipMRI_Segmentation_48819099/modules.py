@@ -39,43 +39,41 @@ def unet_2d(input_size = (256, 256, 1), num_filters=32):
     # Input layer: expects images of shape input_size
     inputs = tf.keras.Input(shape=input_size)
 
-    # Encoder (downsampling)
-    # Block 1
+    # Encoder Block 1
     c1 = double_conv(inputs, num_filters)  # Feature extraction
     p1 = tf.keras.layers.MaxPooling2D((2, 2))(c1)  # Downsample (Using MaxPooling)
 
-    # Block 2
+    # Encoder Block 2
     c2 = double_conv(p1, num_filters * 2)
     p2 = tf.keras.layers.MaxPooling2D((2, 2))(c2)
 
-    # Block 3
+    # Encoder Block 3
     c3 = double_conv(p2, num_filters * 4)
     p3 = tf.keras.layers.MaxPooling2D((2, 2))(c3)
 
-    # Block 4
+    # Encoder Block 4
     c4 = double_conv(p3, num_filters * 8)
     p4 = tf.keras.layers.MaxPooling2D((2, 2))(c4)
 
     # Bottleneck (End of Encoder)
     c5 = double_conv(p4, num_filters * 16)
 
-    # Decoder (upsampling)
-    # Up Block 4
+    # Decoder Block 1
     u4 = tf.keras.layers.Conv2DTranspose(num_filters * 8, (2, 2), strides=(2, 2), padding='same')(c5)  # Upsample
     u4 = tf.keras.layers.concatenate([u4, c4])  # Skip connection
     c6 = double_conv(u4, num_filters * 8)
 
-    # Up Block 3
+    # Decoder Block 2
     u3 = tf.keras.layers.Conv2DTranspose(num_filters * 4, (2, 2), strides=(2, 2), padding='same')(c6)
     u3 = tf.keras.layers.concatenate([u3, c3])
     c7 = double_conv(u3, num_filters * 4)
 
-    # Up Block 2
+    # Decoder Block 3
     u2 = tf.keras.layers.Conv2DTranspose(num_filters * 2, (2, 2), strides=(2, 2), padding='same')(c7)
     u2 = tf.keras.layers.concatenate([u2, c2])
     c8 = double_conv(u2, num_filters * 2)
 
-    # Up Block 1
+    # Decoder Block 4
     u1 = tf.keras.layers.Conv2DTranspose(num_filters, (2, 2), strides=(2, 2), padding='same')(c8)
     u1 = tf.keras.layers.concatenate([u1, c1])
     c9 = double_conv(u1, num_filters)
