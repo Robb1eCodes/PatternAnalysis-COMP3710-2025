@@ -63,6 +63,16 @@ The model has been trained with the following hyperparameters:
 - nibabel (5.3.2)
 - matplotlib (3.10.6)
 
+### Train model
+- Run Train.py
+    - Important hyperparameters (epochs, batch size, image size, num classes) and data file locations can be changed at the top of the file.
+    - The best model parameters will save to the MODEL_SAVE_OUT location.
+
+### Test (Predict) using model
+- Run predict.py
+    - Set the image shape and number of classes to how they were when the model was trained.
+    - Ensure TRAINED_MODEL is pointing to the best model parameters .h5 file.
+    - Results will print to terminal/be visualised using matplotlib.
 
 ## Training Results
 
