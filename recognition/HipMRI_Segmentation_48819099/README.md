@@ -53,6 +53,8 @@ The model has been trained with the following hyperparameters:
 - Img Size = 256, 128
 - Batch Size = 64 (a good mix pick between taking too long to train, and exceeding memory availability, as well as training generalisation)
 
+Reproducability of results is very high, after running multiple times I have not had a result that differs significantly than previous. There is a little bit of chance that the model can get stuck at a local minima, but the choice of learning rate, optimiser etc. all try to negate any of these effects.
+
 ## How to use
 ### Dependencies: 
 - Python (3.13.7)
@@ -82,18 +84,20 @@ The model has been trained with the following hyperparameters:
 
 ## Test Results
 
-### Example Input/Ground Truth Mask/Predicted Mask
-
-![Example Input/Ground Truth Mask/Predicted Mask Image](input_groundtruth_prediction.png)
-
 ### DICE Scores over Mean + Classes
 
 | Metric | Value |
 |---|---|
-| Mean Dice across all Classes | 0.9152 |
-| Class 0 Dice Score | 0.9965 |
-| Class 1 Dice Score | 0.9822 |
-| Class 2 Dice Score | 0.9267 |
-| Class 3 Dice Score | 0.9603 |
-| Class 4 Dice Score | 0.7855 |
-| Class 5 Dice Score | 0.8399 |
+| Mean Dice across all Classes | 0.9078 |
+| Class 0 Dice Score | 0.9969 |
+| Class 1 Dice Score | 0.9816 |
+| Class 2 Dice Score | 0.9253 |
+| Class 3 Dice Score | 0.9516 |
+| Class 4 Dice Score | 0.7703 |
+| Class 5 Dice Score | 0.8209 |
+
+### Example Input/Ground Truth Mask/Predicted Mask Visualisation
+
+![Example 1 Input/Ground Truth Mask/Predicted Mask Image](input_groundtruth_prediction.png)
+
+![Example 2 Input/Ground Truth Mask/Predicted Mask Image](input_groundtruth_prediction2.png)
